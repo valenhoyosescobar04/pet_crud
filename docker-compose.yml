@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16
+    container_name: petcrud-db
+    restart: always
+    environment:
+      POSTGRES_DB: PetCRUD
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+    ports:
+      - "5432:5432"
+    volumes:
+      - petcrud_data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    container_name: petcrud-app
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - "8088:8088"
+    environment:
+      SERVER_PORT: 8088
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/PetCRUD
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 123
+
+volumes:
+  petcrud_data:
