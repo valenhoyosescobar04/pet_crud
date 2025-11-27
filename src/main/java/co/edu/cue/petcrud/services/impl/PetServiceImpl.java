@@ -7,6 +7,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Implementación del servicio PetService. Se encarga de coordinar la lógica
+ * entre el controlador y el repositorio. Aquí se aplican validaciones sencillas
+ * y comportamientos por defecto (por ejemplo, vaccinated=false si es null).
+ */
 @Service
 public class PetServiceImpl implements PetService {
 
